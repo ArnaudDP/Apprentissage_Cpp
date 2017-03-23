@@ -1,0 +1,33 @@
+# depslib dependency file v1.0
+1490279491 source:/home/ubuntu/Desktop/motMystere/main.cpp
+	<iostream>
+	<string>
+	<ctime>
+	<cstdlib>
+	"fonctions.h"
+
+1490281985 source:/home/ubuntu/Desktop/motMystere/fonctions.cpp
+	"fonctions.h"
+
+1490281783 /home/ubuntu/Desktop/motMystere/fonctions.h
+	<iostream>
+	<string>
+	<ctime>
+	<cstdlib>
+
+1490281985 source:/home/ubuntu/Desktop/C++/motMystere/fonctions.cpp
+	"fonctions.h"
+
+1490281783 /home/ubuntu/Desktop/C++/motMystere/fonctions.h
+	<iostream>
+	<string>
+	<ctime>
+	<cstdlib>
+
+1490282181 source:/home/ubuntu/Desktop/C++/motMystere/main.cpp
+	<iostream>
+	<string>
+	<ctime>
+	<cstdlib>
+	"fonctions.h"
+
