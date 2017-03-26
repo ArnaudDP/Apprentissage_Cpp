@@ -1,0 +1,170 @@
+#include <iostream> // directive de préprocesseur; charger une bibliothèque
+#include <string> // toujours inclure cette bibliothèque pour les chaines de charactères
+#include <cmath> // pour les maths
+using namespace std; // utilise l'espace des noms standard
+int main() // crée la fonction main retournant un entier, cf retun 0
+{
+cout << "Bonjour tout le monde !" << endl << "Comment allez-vous ?" << endl;
+/* cout : inclu dans iostream, c'est une instruction
+cout affiche un message en console
+<<
+"endl" est un retour à la ligne
+Les instructions se terminent toujours par ";" */
+return 0; // la sortie de main
+}
+
+
+/*
+########################################
+VARIABLES
+########################################
+
+Types de variables:
+bool:	Une valeur parmi deux possibles, vrai (true) ou faux (false).
+char:	Un caractère.
+int:	Un nombre entier. NB int / int = int !! (la partie entière)
+unsigned int:	Un nombre entier positif ou nul.
+double:	Un nombre à virgule.
+string:	Une chaîne de caractères, c'est-à-dire un mot ou une phrase.
+
+Déclarer un variable : TYPE NOM(VALEUR); ou TYPE NOM = VALEUR;
+int a(2),b(4),c(-1); // pour déclarer plusieurs variables du même type
+TYPE NOM; // pour déclarer sans initialiser
+int ageUtilisateur(16);  //Déclaration d'une variable.
+int& maVariable(ageUtilisateur); //Déclaration d'une référence (= alias) nommée maVariable du même type que ageUtilisateur
+ageUtilisateur=23; // Affectation d'une nouvelle valeur dans une variable déjà déclarée
+int const VARIABLE(10); // pour déclarer une constante
+++VAR; // pour incrémenter de un une variable
+--VAR; // pour décrémenter de un une variable
+VAR += 3; // pour incrémenter de 3
+VAR -= 3; // idem pour la soustraction
+VAR /= 3; // idem pour la division par 3
+VAR *= 3; // pour la division
+
+########################################
+STRUCTURES DE CONTROLE
+########################################
+if (!CONDITION) // on met la négation dans les parenthèses
+{
+
+}
+else if (condition)
+{
+
+}
+else
+{
+
+}
+
+// pour ne tester que l'égalité de int, unsigned int, char (pas double !)
+
+switch (VAR)
+{
+case 0:
+	Blabla;
+	break;
+case 1:
+	Blabla;
+	break;
+case etc...:
+	Blabla;
+	break;
+default:
+	Blabla;
+	break;
+}
+
+while (condition)
+{
+    // Instructions à répéter
+}
+
+do
+{
+    // Instructions
+} while (condition);
+// Ainsi la première instruction est toujours exécutée
+
+for (initialisation ; condition ; incrementation)
+{
+
+}
+
+########################################
+Fonctions :
+########################################
+
+TYPE NAME( TYPE ARGUMENT, TYPE ARGUMENT ) // => prototype, [surcharge de fonction == même nom de fonction, différents arguments => fonction différente dans même espace des noms] 
+//
+{
+	BLABLA;
+	return BLABLA; // sauf si type == void
+}
+
+// PASSAGE PAR REFERENCE :
+TYPE NAME( TYPE& ARGUMENT, etc...){} // permet de modifier la valeur de l'argument, un peu comme variable globale en python
+// Exemple :
+void echange(double& a, double& b)
+{
+    double temporaire(a); //On sauvegarde la valeur de 'a'
+    a = b;                //On remplace la valeur de 'a' par celle de 'b'
+    b = temporaire;       //Et on utilise la valeur sauvegardée pour mettre l'ancienne valeur de 'a' dans 'b'
+}
+// PASSAGE PAR REFERENCE CONSTANTE:
+// Ne copie pas la valeur, comme avec un passage par valeur classique, mais ne modifie pas l'argument
+// Evite de copier l'ensemble de l'argument (exemple string très lourde !)
+// Exemple :
+void f1(string const& texte);
+{
+}
+
+// UTILISER PLUSIEURS FICHIERS: exemple avec un fichier intitulé "math"
+// Fichier source math.cpp:
+
+#include "math.h"
+
+int ajouteDeux(int nombreRecu)
+{
+    int valeur(nombreRecu + 2);
+
+    return valeur;
+}
+
+
+
+// Fichier d'entête / header .h
+// On ne met que le prototype de la fonction
+
+#ifndef MATH_H_INCLUDED
+#define MATH_H_INCLUDED
+
+// On commente son code comme ça avec doxygen, dans le header :
+/**
+ * \brief Fonction qui ajoute 2 au nombre reçu en argument
+ * \param nombreRecu  Le nombre auquel la fonction ajoute 2
+ * \return nombreRecu + 2
+ */
+ 
+#include <string> // on inclue dans le header seulement les library utilisées
+// On n'inclue surtout pas "using namespace std", mais on utilise std::string ...
+
+int ajouteDeux(int nombreRecu);
+void afficherMessage(std::string message);
+
+#endif // MATH_H_INCLUDED
+
+// MAIN()
+
+#include "math.h" // on utilise les guillemets et pas <>, pour inclure le .h, jamais .cpp
+########################################
+Bibliothèque cmaths
+########################################
+sqrt(), sin(rad), cos(rad), tan(rad), exp(), log(), log10(), fabs(), floor(), ceil()
+pow(a,b)
+
+########################################
+Quand on mélange l'utilisation des chevrons et de getline(),
+il faut toujours placer l'instruction cin.ignore() après la ligne cin>>a.
+
+*/
