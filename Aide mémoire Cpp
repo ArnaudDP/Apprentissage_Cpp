@@ -315,6 +315,38 @@ int main()
     cout << "Taille du fichier : " << taille << " octets." << endl;
     return 0;
 }
+
+########################################
+Les Pointeurs
+########################################
+//Afficher l'adresse d'une variable:
+int ageUtilisateur(16);
+cout << "L'adresse est : " << &ageUtilisateur << endl;
+// & avant la variable et pas après le type
+
+// UN POINTEUR EST UNE VARIABLE QUI CONTIENT L'ADRESSE D'UNE AUTRE VARIABLE.
+int *pointeur(0); //déclare pointeur contenant l'adresse d'une variable de type int.
+// Toujours initialiser un pointeur à l'adresse 0, qui n'existe pas pour ne pas pointer vers qq'chose d'important.
+// Stocker une adresse
+pointeur = &ageUtilisateur;
+//Afficher l'adresse
+cout << pointeur;
+//Afficher la valeur de la variable située à l'adresse du pointeur:
+cout << *pointeur;
+
+// Allocation dynamique
+// Lors de la déclaration d'une variable, allocation, puis initialisation
+// En fin de programme libération de la mémoire
+int *pointeur(0);
+pointeur = new int; // demande manuelle d'allocation dynamique d'une case mémoire pour stocker un entier
+delete pointeur;  //On libère la case mémoire
+pointeur = 0;       //On indique que le pointeur ne pointe plus vers rien
+
+// Utilisation des pointeurs:
+	// gérer soi-même le moment de la création et de la destruction des cases mémoire ;
+	// partager une variable dans plusieurs morceaux du code ;
+	// sélectionner une valeur parmi plusieurs options.
+
 ########################################
 Bibliothèque cmaths
 ########################################
