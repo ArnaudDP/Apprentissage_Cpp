@@ -138,14 +138,16 @@ int ajouteDeux(int nombreRecu)
 
 #ifndef MATH_H_INCLUDED
 #define MATH_H_INCLUDED
-
+*/
 // On commente son code comme ça avec doxygen, dans le header :
+
 /**
  * \brief Fonction qui ajoute 2 au nombre reçu en argument
  * \param nombreRecu  Le nombre auquel la fonction ajoute 2
  * \return nombreRecu + 2
  */
- 
+
+/*
 #include <string> // on inclue dans le header seulement les library utilisées
 // On n'inclue surtout pas "using namespace std", mais on utilise std::string ...
 
@@ -157,6 +159,162 @@ void afficherMessage(std::string message);
 // MAIN()
 
 #include "math.h" // on utilise les guillemets et pas <>, pour inclure le .h, jamais .cpp
+
+// VALEURS PAR DEFAUT
+// Les valeurs par défaut sont spécifiées uniquement dans le prototype, pas dans la définition de la fonction !
+// Exemple :
+int nombreDeSecondes(int heures, int minutes = 0, int secondes = 0); // les valeurs par défaut doivent se trouver à la fin de la liste des paramètres (c'est-à-dire à droite).
+
+
+#######################################################
+Tableaux statiques et  tableaux dynamiques (vecteurs) :
+#######################################################
+// Tableaux statiques (=taille constante)
+//Déclaration :
+TYPE NOM[TAILLE]
+// Exemple de déclaration :
+int const tailleTableau(20);   //La taille du tableau, toujours à déclarer constante !
+double anglesIcosagone[tailleTableau];
+// Accès aux valeurs :
+anglesIcosagone[0] // première valeur
+// Parcours avec boucle:
+for (int i(0), i<tailleTableau, ++i)
+{
+ cout << anglesIcosagone[i] << endl;
+}
+// Tableaux et fonctions :
+double fonction(double tableau[], int tailleTableau) // il n'y a pas de moyen de connaitre la taille d'un tableau statique, si on en a besoin dans la fonction, il faut la mettre en argument.
+{
+    //…
+	return UN_DOUBLE_ICI;
+}
+// NB : on ne peut pas écrire une fonction qui renvoie un tableau statique!
+// NB : un tableau est toujours passé par référence, automatiquement, d'où l'abscence de & !
+
+// Tableaux dynamiques (vecteurs)
+#include <vector> // Ne pas oublier !
+//Déclaration
+vector<TYPE> NOM(TAILLE); // taille entre parenthèses
+// Exemple :
+vector<int> tableau(5, 3);  // Crée un tableau de 5 entiers valant tous 3
+vector<double> tableau; // Crée un tableau de 0 nombre à virgule
+tableau[0] = 118218;  // Remplissage de la première case
+// Changer la taille :
+tableau.push_back(8); // On ajoute une 4ème case au tableau qui contient la valeur 8
+tableau.pop_back(); // On supprime la dernière case
+tableau.size(); // Pour connaitre la taille du tableau
+// Vecteurs et fonctions :
+//Une fonction recevant un tableau d'entiers en argument :
+void fonction(vector<int> a)
+{
+    //…
+}
+// Passage par référence constante pour gagner du temps (mais tableau dynamique non modifiable)
+void fonction(vector<int> const& a)
+{
+    //…
+}
+// Dans les header penser à inclure:
+#include <vector>
+std::vector<int>& tableau;
+// On peut créer une fonction qui renvoie un vecteur:
+vector<double> encoreUneFonction(int a)
+{
+    //...
+}
+
+// Tableaux multidimensionnels:
+type nomTableau[tailleX][tailleY]; //Déclaration
+tableau[0][0]; // accède à la case en-bas à gauche de la grille
+tableau[0][1]; // correspond à celle qui se trouve juste au dessus
+tableau[1][0]; // se situe directement à sa droite
+double grilleExtreme[5][4][6][2][7];
+vector<vector<int> > grille; // vecteurs multidimensionnels. !! Pas un tableau, mais une suite de ligne les lignes peuvent avoir des longueurs différentes
+grille[0].push_back(8); //Ajoute une case contenant 8 à la première ligne du tableau
+
+// Strings comme les vecteurs !
+size()
+push_back()
++= // pour ajouter plusieurs lettres d'un coup
+
+########################################
+Lire et modifier des fichiers
+########################################
+#include <fstream>
+string const nomFichier("C:/Nanoc/scores.txt"); // nom du fichier dans une variable
+// Ecrire dans un fichier
+ofstream monFlux(nomFichier.c_str(),ios::app); // création d'un objet de type flux. On doit utiliser la méthode .c_str() pour ouvrir le fichier, parametre ios::app, facultatif pour append.
+if(monFlux)  //On teste si tout est OK
+{
+	monFlux << "Bonjour, je suis une phrase écrite dans un fichier." << endl;
+}
+else
+{
+    cout << "ERREUR: Impossible d'ouvrir le fichier." << endl;
+}
+// Lire un fichier:
+// * Ligne par ligne :
+string ligne;
+getline(monFlux, ligne); //On lit une ligne complète
+// * mot par mot :
+double nombre;
+monFlux >> nombre; //Lit un nombre à virgule depuis le fichier
+string mot;
+monFlux >> mot;    //Lit un mot depuis le fichier
+// * char par char :
+char a;
+monFlux.get(a); // On obtient tous les char, tab, \n, etc..
+// Pour changer de mode :
+monFlux.ignore(); //On change de mode
+
+//Exemple, lire tout un fichier:
+   ifstream fichier("C:/Nanoc/fichier.txt"); // ! ifstream, pas ofstream ;)
+   if(fichier)
+   {
+      //L'ouverture s'est bien passée, on peut donc lire
+
+      string ligne; //Une variable pour stocker les lignes lues
+
+      while(getline(fichier, ligne)) //Tant qu'on n'est pas à la fin, on lit
+      {
+         cout << ligne << endl;
+         //Et on l'affiche dans la console
+         //Ou alors on fait quelque chose avec cette ligne
+         //À vous de voir
+      }
+   }
+   else
+   {
+      cout << "ERREUR: Impossible d'ouvrir le fichier en lecture." << endl;
+   }
+// Fermeture prématurée d'un fichier (fait automatiquement si non)
+flux.close();
+// Ouverture volontaire (fait automatiquement si non)
+ofstream flux;  //Un flux sans fichier associé
+flux.open("C:/Nanoc/data.txt");
+
+// Position du curseur :
+// Connaître sa position en octet par rapport au début !
+Pour ifstream	Pour ofstream
+tellg()		tellp()
+int position = fichier.tellp(); //On récupére la position
+// Se déplacer
+Pour ifstream	Pour ofstream
+seekg()		seekp()
+flux.seekp(seDeplacerDeCeNombreDeChar, position);
+// avec poistion qui peut valoir : ios::beg, ios::end, ios::cur
+
+//Connaitre la taille d'un fichier:
+int main()
+{
+    ifstream fichier("C:/Nanoc/meilleursScores.txt");  //On ouvre le fichier
+    fichier.seekg(0, ios::end);  //On se déplace à la fin du fichier
+    int taille;
+    taille = fichier.tellg();
+    //On récupère la position qui correspond donc a la taille du fichier !
+    cout << "Taille du fichier : " << taille << " octets." << endl;
+    return 0;
+}
 ########################################
 Bibliothèque cmaths
 ########################################
